@@ -60,7 +60,7 @@ def investment_simulator():
                 print("Please choose: \n 1. Buy \n 2. Sell \n 0. Back")
                 stock_trade = int(input("Please Select An Option: "))
                 
-                while stock_trade:
+                while stock_trade == 1:
                     amount = int(input("Apple Stock - Enter Purchase Amount: £"))
                     
                     apple_shares = amount / apple_stock
@@ -73,7 +73,7 @@ def investment_simulator():
                         
                         # purchase overview
                         if confirm == 1:
-                            print(f"Transaction Complete! \n You have Succesfully Purchased {apple_shares:,.4f} Shares of Apple Stock worth about £{amount:,.2f}.")
+                            print(f"Transaction Complete! \n You have SUCCESSFULLY PURCHASED {apple_shares:,.4f} Shares of Apple Stock worth about £{amount:,.2f}.")
                             account.balance -= amount
                             account.total_invested += amount
                             # account.stock_invested
@@ -92,7 +92,7 @@ def investment_simulator():
                                 new_stock = Stock("Apple", apple_shares, apple_stock, amount)
                                 account.stocks.append(new_stock)
                             
-                            new_transaction = Transaction_History("APPLE", amount)
+                            new_transaction = Transaction_History("APPLE", amount, "PURCHASE")
                             account.transaction_log.append(new_transaction)
                             
                             print(f"Updated Balance: £{account.balance:,.2f}")
@@ -113,7 +113,48 @@ def investment_simulator():
                             print("____________________________________________")
                         else:
                             continue
-            
+                
+                while stock_trade == 2:
+                    amount = int(input("Apple Stock - Enter Sell Amount: £"))
+                    
+                    apple_shares = amount / apple_stock
+
+                    if account.total_invested > amount:
+                        print("Please confirm your sell:")
+                        print(f"Apple Stock Sell: £{amount:,.2f}, Shares: {apple_shares:,.4f} \n 1. Confirm \n 0. Cancel")
+                        
+                        confirm = int(input("Please Select An Option: "))
+
+                        # while confirm:
+                        #     # money logic
+                        #     account.total_invested -= amount
+                        #     account.balance += amount
+
+                        #     #transaction logic
+                        #     new_transaction = Transaction_History("APPLE", amount, "SOLD")
+                        #     account.transaction_log.append(new_transaction)
+
+                        #     print(f"Transaction Complete! \n You have SUCCESSFULLY SOLD {apple_shares:,.4f} Shares of Apple Stock worth about £{amount:,.2f}.")
+                            
+                        #     break
+
+                        # throws an error for Stock where stock_total not attribute in Stock. Fix it!!
+                        if confirm == 1:
+                            # money logic
+                            account.total_invested -= amount
+                            account.balance += amount
+
+                            #transaction logic
+                            new_transaction = Transaction_History("APPLE", amount, "SOLD")
+                            account.transaction_log.append(new_transaction)
+
+                            print(f"Transaction Complete! \n You have SUCCESSFULLY SOLD {apple_shares:,.4f} Shares of Apple Stock worth about £{amount:,.2f}.")
+                            
+                            break
+                        elif confirm == 0:
+                            break
+
+
             # stocks
             if stock_choice == 2:
                 print("will add later")
