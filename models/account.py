@@ -1,3 +1,5 @@
+from models.transaction import Transaction_History
+
 # account class
 class Account:
     def __init__(self, user, balance, stocks, total_invested, transaction_log):
@@ -11,6 +13,10 @@ class Account:
         amount = int(input("Deposit \n Enter Deposit Amount: £"))
         self.balance += amount
         # self.transaction_log = amount - want to add deposits and withdrawals to the transaction feature to reflect true/all activity
+        
+        new_transaction = Transaction_History("DEPOSIT", amount, "+")
+        self.transaction_log.append(new_transaction)
+        
         print("____________________________________________")
         print(f"You have successfully deposited £{amount:,.2f} \nUpdated Balance: £{self.balance:,.2f}")
     
@@ -26,6 +32,10 @@ class Account:
             if withdraw <= self.balance:
                 self.balance = self.balance - withdraw
                 print(f"You have successfully withdrawn £{withdraw:,.2f} \n Updated Balance: £{self.balance:,.2f}")
+
+                new_transaction = Transaction_History("WITHDRAW", withdraw, "-")
+                self.transaction_log.append(new_transaction)
+
                 break
             elif withdraw > self.balance:
                 print("Insufficent Funds")

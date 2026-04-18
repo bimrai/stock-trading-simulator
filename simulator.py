@@ -125,6 +125,7 @@ def investment_simulator():
                         
                         confirm = int(input("Please Select An Option: "))
 
+                        # seeing if while implementation will solve edge cases
                         # while confirm:
                         #     # money logic
                         #     account.total_invested -= amount
@@ -139,6 +140,7 @@ def investment_simulator():
                         #     break
 
                         # throws an error for Stock where stock_total not attribute in Stock. Fix it!!
+
                         if confirm == 1:
                             # money logic
                             account.total_invested -= amount
@@ -147,6 +149,10 @@ def investment_simulator():
                             #transaction logic
                             new_transaction = Transaction_History("APPLE", amount, "SOLD")
                             account.transaction_log.append(new_transaction)
+
+                            # trying to solve the problem where portfolio should update new price/shares after selling
+                            # account.stock_total -= amount
+                            # account.shares -= apple_shares
 
                             print(f"Transaction Complete! \n You have SUCCESSFULLY SOLD {apple_shares:,.4f} Shares of Apple Stock worth about £{amount:,.2f}.")
                             
@@ -175,8 +181,3 @@ def investment_simulator():
         if menu_option == 0:
             print("You have successfully logged out! Have a nice day!")
             break
-                    
-
-
-                              
-investment_simulator() # run python main.py
