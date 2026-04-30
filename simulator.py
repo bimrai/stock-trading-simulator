@@ -38,6 +38,8 @@ def investment_simulator():
         if menu_option == 3:
             account.check_balance()
             
+
+        # implement API to reduce repeated logic for remaining stocks
         # stock market   
         if menu_option == 4:
             
@@ -124,7 +126,7 @@ def investment_simulator():
                         print(f"Apple Stock Sell: £{amount:,.2f}, Shares: {apple_shares:,.4f} \n 1. Confirm \n 0. Cancel")
                         
                         confirm = int(input("Please Select An Option: "))
-
+                        
                         # seeing if while implementation will solve edge cases
                         # while confirm:
                         #     # money logic
