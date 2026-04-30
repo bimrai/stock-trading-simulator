@@ -1,7 +1,10 @@
-stock_list = {
-        "Apple Inc" : 189.83,
-        "NVIDIA Corp": 182.62,
-        "Tesla Inc" : 398.28,
-        "Meta Platforms Inc": 620.34,
-        "Amazon.com Inc": 211.65, 
-    }
+from models.api import get_stock_data
+
+def market():
+    stock_list = []
+    
+    for ticker in ["AAPL", "NVDA", "TSLA", "META", "AMZN"]:
+        data = get_stock_data(ticker)
+        stock_list.append(data)
+        
+    return stock_list

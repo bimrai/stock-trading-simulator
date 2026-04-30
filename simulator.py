@@ -1,7 +1,7 @@
 from models.account import Account
 from models.stock import Stock
 from models.transaction import Transaction_History
-from data.stocks import stock_list
+from data.stocks import stock_list # fix this error that doesnt render market after API implementation
 
 def investment_simulator():
     
