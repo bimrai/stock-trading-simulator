@@ -1,7 +1,7 @@
 from models.account import Account
 from models.stock import Stock
 from models.transaction import Transaction_History
-from data.stocks import market # fix this error that doesnt render market after API implementation
+from data.stocks import market
 
 def investment_simulator():
     
@@ -19,12 +19,19 @@ def investment_simulator():
         print("6. Transaction History")
         print("0. Logout")
         print("____________________________________________")
-        # user option input for menu 
-        menu_option = int(input("Please Choose An Option: "))
         
-        # handle non accepted inputs
-        while menu_option not in range(0, 7) and menu_option != int:
-            menu_option = int(input("Invalid! Please Choose An Option: "))
+        # handle non accepted inputs        
+        while True:
+            try:
+                menu_option = int(input("Please Choose An Option: ")) # user option input for menu 
+                
+                # validates input and catches errors without crashing program
+                if menu_option in range(0, 7):
+                    break
+                else:
+                    print("Invalid! Please Choose An Option.")
+            except:
+                print("Invalid! Please Choose An Option.")
         
         # deposit
         if menu_option == 1:
