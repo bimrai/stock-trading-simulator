@@ -1,7 +1,7 @@
 from models.account import Account
 from models.stock import Stock
 from models.transaction import Transaction_History
-from data.stocks import stock_list # fix this error that doesnt render market after API implementation
+from data.stocks import market # fix this error that doesnt render market after API implementation
 
 def investment_simulator():
     
@@ -23,7 +23,7 @@ def investment_simulator():
         menu_option = int(input("Please Choose An Option: "))
         
         # handle non accepted inputs
-        while menu_option not in range(0, 7):
+        while menu_option not in range(0, 7) and menu_option != int:
             menu_option = int(input("Invalid! Please Choose An Option: "))
         
         # deposit
@@ -45,8 +45,10 @@ def investment_simulator():
             
             print("Stock Market:")
             
-            for i, company in enumerate(stock_list.keys(), start = 1):
-                print(f"{i}. {company}")
+            # list(enumerate(market(), start=1))
+            
+            for i, stock in enumerate(market(), start=1):
+                print(f'{i}. ({stock["ticker"]}), {stock["name"]}: £{stock["price"]:,.2f}')
             
             print("0. Back")
             
