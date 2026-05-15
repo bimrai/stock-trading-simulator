@@ -7,4 +7,4 @@ class Stock:
         self.stock_total = stock_total
     
     def show_stock(self):
-        print(f"Stock: {self.stock_name} \n Shares: {self.shares:.4f} Total Invested: £{self.stock_total:,.2f} \n Bought Price: £{self.buy_price:,.2f}")
+        print(f"{self.stock_name} \n Shares: {self.shares:.4f} Total Invested: £{self.stock_total:,.2f} \n Bought Price: £{self.buy_price:,.2f}")
