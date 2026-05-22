@@ -18,7 +18,7 @@ def trade_stock(account, stock_name, stock_price, ticker):
         stock_shares = amount / stock_price
         
         # buying power check + confirm purchase
-        if account.balance >= amount and account.balance > stock_price:
+        if account.balance >= amount:
             print(f"Please confirm your purchase:")
             print(f"{stock_name} Purchase: £{amount:,.2f}, Shares: {stock_shares:,.4f} \n 1. Confirm \n 0. Cancel")
             confirm = int(input("Please Select An Option: "))
@@ -43,7 +43,7 @@ def trade_stock(account, stock_name, stock_price, ticker):
                         break
                     
                 if not found:
-                    new_stock = Stock(stock_name, stock_shares, stock_price, amount)
+                    new_stock = Stock(stock_name, stock_shares, stock_price, amount, ticker)
                     account.stocks.append(new_stock)
                 
                 new_transaction = Transaction_History(stock_name, amount, "PURCHASE")
@@ -69,10 +69,23 @@ def trade_stock(account, stock_name, stock_price, ticker):
                 continue
 
     while stock_trade == 2:
+        
+        owned_stock = None
+        
+        for stock in account.stocks:
+            if stock.stock_name == stock_name:
+                owned_stock = stock
+                break
+        
+        if owned_stock:
+            print(f"You own: SHARES: {owned_stock.shares:,.4f} shares | VALUE: £{owned_stock.stock_total:,.2f}")
+        
         amount = int(input(f"{stock_name} - Enter Sell Amount: £"))
         stock_shares = amount / stock_price
+        
+        if owned_stock.stock_total >= amount:
+            # sell
 
-        if account.total_invested > amount:
             print("Please confirm your sell:")
             print(f"{stock_name} Sell: £{amount:,.2f}, Shares: {stock_shares:,.4f} \n 1. Confirm \n 0. Cancel")
             
@@ -102,6 +115,8 @@ def trade_stock(account, stock_name, stock_price, ticker):
                 break
             elif confirm == 0:
                 break
+        else:
+            print(f"You cannot sell more than you have invested. Current investment: £{owned_stock.stock_total:,.2f} \n Please Enter Valid Input")
     
     
     

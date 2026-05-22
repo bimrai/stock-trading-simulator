@@ -1,4 +1,5 @@
 from models.transaction import Transaction_History
+from models.api import get_stock_data
 
 # account class
 class Account:
@@ -46,8 +47,17 @@ class Account:
             print("Portfolio")
             print(f"Balance: £{self.balance:,.2f}")
             print(f"Total Invested: £{self.total_invested:,.2f}")
+            
+            total_profit_loss = 0
+            
             for stock in self.stocks:
-                stock.show_stock()
+                stock.show_stock()        
+                current_data = get_stock_data(stock.ticker) 
+                current_price = current_data["price"]     
+                unrealised_pl = (current_price - stock.avg_price) * stock.shares
+                total_profit_loss += unrealised_pl
+                print(f"Profit/Loss: £{unrealised_pl:,.2f}")
+            print(f"Total Profit/Loss: £{total_profit_loss:,.2f}")
                 
     def transactions(self):
         print("____________________________________________")
