@@ -70,7 +70,6 @@ def trade_stock(account, stock_name, stock_price, ticker):
 
     while stock_trade == 2:
         amount = int(input(f"{stock_name} - Enter Sell Amount: £"))
-        
         stock_shares = amount / stock_price
 
         if account.total_invested > amount:
@@ -87,17 +86,18 @@ def trade_stock(account, stock_name, stock_price, ticker):
                 for stock in account.stocks:
                     if stock.stock_name == stock_name:
                         stock.shares -= stock_shares
-                        stock.stock_total -= amount
+                        stock.stock_total -= amount                        
                         found = True
                         break
-                
-                
 
                 #transaction logic
                 new_transaction = Transaction_History(stock_name, amount, "SOLD")
                 account.transaction_log.append(new_transaction)
                 
                 print(f"Transaction Complete! \n You have SUCCESSFULLY SOLD {stock_shares:,.4f} Shares of {stock_name} worth about £{amount:,.2f}.")
+                
+                realised_pl = (stock_price - stock.avg_price) * stock_shares
+                print(f"Realised P/L: £{realised_pl:,.2f}")
                 
                 break
             elif confirm == 0:
