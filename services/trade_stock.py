@@ -28,14 +28,16 @@ def trade_stock(account, stock_name, stock_price, ticker):
                 print(f"Transaction Complete! \n You have SUCCESSFULLY PURCHASED {stock_shares:,.4f} Shares of {stock_name} worth about £{amount:,.2f}.")
                 account.balance -= amount
                 account.total_invested += amount
-                # account.stock_invested
+                
                 
                 # check if stock already exists or needs to be created
                 found = False
                 
                 for stock in account.stocks:
                     if stock.stock_name == stock_name:
+                        old_shares = stock.shares
                         stock.shares += stock_shares
+                        stock.avg_price = (old_shares * stock.avg_price + stock_shares * stock_price) / stock.shares
                         stock.stock_total += amount
                         found = True
                         break
