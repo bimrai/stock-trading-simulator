@@ -31,7 +31,7 @@ def investment_simulator():
                     break
                 else:
                     print("Invalid! Please Choose An Option.")
-            except:
+            except ValueError:
                 print("Invalid! Please Choose An Option.")
         
         # deposit

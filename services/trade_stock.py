@@ -43,7 +43,7 @@ def trade_stock(account, stock_name, stock_price, ticker):
                         break
                     
                 if not found:
-                    new_stock = Stock(stock_name, stock_shares, stock_price, amount, ticker)
+                    new_stock = Stock(stock_name, ticker, stock_shares, stock_price, amount)
                     account.stocks.append(new_stock)
                 
                 new_transaction = Transaction_History(stock_name, amount, "PURCHASE")
@@ -79,6 +79,9 @@ def trade_stock(account, stock_name, stock_price, ticker):
         
         if owned_stock:
             print(f"You own: SHARES: {owned_stock.shares:,.4f} shares | VALUE: £{owned_stock.stock_total:,.2f}")
+        else:
+            print("You do not own this stock.")
+            break
         
         amount = int(input(f"{stock_name} - Enter Sell Amount: £"))
         stock_shares = amount / stock_price

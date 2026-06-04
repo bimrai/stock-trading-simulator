@@ -19,7 +19,7 @@ def create_table():
     command1 = """CREATE TABLE IF NOT EXISTS account(
         user TEXT,
         balance REAL,
-        total_investment REAL 
+        total_invested REAL 
         )"""
         
     cursor.execute(command1)
@@ -72,3 +72,34 @@ def save_account(account):
     connection.commit()
     connection.close()
 
+# this function loads the data
+def load_account():
+    
+    connection = sqlite3.connect('portfolio.db')
+    cursor = connection.cursor()
+    
+    # account pull and relocate
+    select_account = """SELECT * FROM account"""
+    cursor.execute(select_account)
+    account_data = cursor.fetchone() # gets results and stored in a variable account_data
+    account = Account(account_data[0], account_data[1], [], account_data[2], [])
+    
+    # stocks pull and relocate
+    select_stock = """SELECT * FROM stocks"""
+    cursor.execute(select_stock)
+    stocks_data = cursor.fetchall()
+    for row in stocks_data:
+        stocks = Stock(row[0], row[1], row[2], row[3], row[4])
+        account.stocks.append(stocks)
+    
+    # transaction selection
+    select_transaction = """SELECT * FROM transactions"""
+    cursor.execute(select_transaction)
+    transaction_data = cursor.fetchall()
+    for row in transaction_data:
+        transaction = Transaction_History(row[0], row[1], row[2])
+        account.transaction_log.append(transaction)
+        
+    # close
+    connection.close()
+    return account
