@@ -47,6 +47,8 @@ class Account:
             print("Portfolio")
             print(f"Balance: £{self.balance:,.2f}")
             print(f"Total Invested: £{self.total_invested:,.2f}")
+            print("____________________________________________")
+            
             
             total_profit_loss = 0
             
@@ -56,7 +58,8 @@ class Account:
                 current_price = current_data["price"]     
                 unrealised_pl = (current_price - stock.avg_price) * stock.shares
                 total_profit_loss += unrealised_pl
-                print(f"Profit/Loss: £{unrealised_pl:,.2f}")
+                print(f"\n Profit/Loss: £{unrealised_pl:,.2f}")
+                print("____________________________________________")
             print(f"Total Profit/Loss: £{total_profit_loss:,.2f}")
                 
     def transactions(self):
@@ -66,4 +69,4 @@ class Account:
         print(f"Total Invested: £{self.total_invested:,.2f}")
         
         for log in self.transaction_log:
-            log.show_transaction()
+            log.show_transaction()       
