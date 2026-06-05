@@ -1,5 +1,0 @@
-To-do
-
-1. Sell feature functional !done!
-2. When buy or sell, label type of transaction detail to indicate action to reduce confusion for user
-3.
