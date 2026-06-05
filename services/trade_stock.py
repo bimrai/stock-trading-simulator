@@ -120,6 +120,3 @@ def trade_stock(account, stock_name, stock_price, ticker):
                 break
         else:
             print(f"You cannot sell more than you have invested. Current investment: £{owned_stock.stock_total:,.2f} \n Please Enter Valid Input")
-    
-    
-    

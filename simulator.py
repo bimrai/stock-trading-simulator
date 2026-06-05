@@ -3,11 +3,14 @@ from models.stock import Stock
 from models.transaction import Transaction_History
 from data.stocks import market
 from services.trade_stock import trade_stock
+from services.database import create_table, save_account, load_account
 
 def investment_simulator():
     
+    create_table()
+    
     # class object created           
-    account = Account("BIM117", 0, [], 0, [])
+    account = load_account()
     
     while True:
         # menu
@@ -72,4 +75,5 @@ def investment_simulator():
         # exit 
         if menu_option == 0:
             print("You have successfully logged out! Have a nice day!")
+            save_account(account)
             break

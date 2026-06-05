@@ -55,6 +55,10 @@ def save_account(account):
     connection = sqlite3.connect('portfolio.db')
     cursor = connection.cursor()
     
+    cursor.execute("DELETE FROM account")
+    cursor.execute("DELETE FROM stocks")
+    cursor.execute("DELETE FROM transactions")
+    
     insert_account = """INSERT INTO account (user, balance, total_invested) VALUES (?, ?, ?)"""
     
     cursor.execute(insert_account, (account.user, account.balance, account.total_invested))
@@ -82,6 +86,9 @@ def load_account():
     select_account = """SELECT * FROM account"""
     cursor.execute(select_account)
     account_data = cursor.fetchone() # gets results and stored in a variable account_data
+    if account_data is None:
+        return Account("user", 0, [], 0, [])
+    
     account = Account(account_data[0], account_data[1], [], account_data[2], [])
     
     # stocks pull and relocate
