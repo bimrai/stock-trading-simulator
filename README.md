@@ -1,4 +1,4 @@
-# Stock Trading Simulator 📈
+# Stock Trading Simulator
 
 A Python CLI application that simulates stock trading with live market prices, portfolio tracking, and persistent data storage.
 
