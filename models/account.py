@@ -36,7 +36,7 @@ class Account:
                 self.balance = self.balance - withdraw
                 print(f"You have successfully withdrawn £{withdraw:,.2f} \n Updated Balance: £{self.balance:,.2f}")
 
-                new_transaction = Transaction_History("WITHDRAW", withdraw, "-")
+                new_transaction = Transaction_History("WITHDRAW", withdraw, "-", current_datetime)
                 self.transaction_log.append(new_transaction)
 
                 break

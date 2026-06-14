@@ -110,7 +110,7 @@ def trade_stock(account, stock_name, stock_price, ticker):
                         break
 
                 #transaction logic
-                new_transaction = Transaction_History(stock_name, amount, "SOLD")
+                new_transaction = Transaction_History(stock_name, amount, "SOLD", current_datetime)
                 account.transaction_log.append(new_transaction)
                 
                 print(f"Transaction Complete! \n You have SUCCESSFULLY SOLD {stock_shares:,.4f} Shares of {stock_name} worth about £{amount:,.2f}.")
