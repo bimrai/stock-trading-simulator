@@ -2,9 +2,12 @@ from models.account import Account
 from models.stock import Stock
 from models.transaction import Transaction_History
 from data.stocks import market
+import datetime
 
 
 def trade_stock(account, stock_name, stock_price, ticker):
+
+    current_datetime = datetime.datetime.now()
 
     print("____________________________________________")
     print(f"Selected {stock_name} Stock: \n {stock_name} Current Price: £{stock_price:,.2f} | Current Balance: £{account.balance:,.2f}")
@@ -46,7 +49,7 @@ def trade_stock(account, stock_name, stock_price, ticker):
                     new_stock = Stock(stock_name, ticker, stock_shares, stock_price, amount)
                     account.stocks.append(new_stock)
                 
-                new_transaction = Transaction_History(stock_name, amount, "PURCHASE")
+                new_transaction = Transaction_History(stock_name, amount, "PURCHASE", current_datetime)
                 account.transaction_log.append(new_transaction)
                 
                 print(f"Updated Balance: £{account.balance:,.2f}")

@@ -1,6 +1,8 @@
 from models.transaction import Transaction_History
 from models.api import get_stock_data
+import datetime
 
+current_datetime = datetime.datetime.now()
 # account class
 class Account:
     def __init__(self, user, balance, stocks, total_invested, transaction_log):
@@ -15,7 +17,7 @@ class Account:
         self.balance += amount
         # self.transaction_log = amount - want to add deposits and withdrawals to the transaction feature to reflect true/all activity
         
-        new_transaction = Transaction_History("DEPOSIT", amount, "+")
+        new_transaction = Transaction_History("DEPOSIT", amount, "+", current_datetime)
         self.transaction_log.append(new_transaction)
         
         print("____________________________________________")
